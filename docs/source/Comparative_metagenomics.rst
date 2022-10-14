@@ -7,16 +7,18 @@ Comparative metagenomics
 Normalization methods, alpha & beta diversity, and differentially abundant taxa
 ###############################################################################
 
-In this practical session we will make use of an actual analytical pipeline using publicly-available data from MGnify. The excercises are organized in 4 main sections:
+In this practical session we aim to demonstrate how the MGnifyR tool can be used to fetch data and metadata of a MGnify metagenomic analyisis. Then we show how to generate diversity metrics for comparative metagenomics using taxonomic profiles. Finally, we will run an analisys to detect differentially abundant taxa. The dataset is the TARA ocean metagenomic study corresponding to size fractions for prokaryotes `MGYS00002008. <https://www.ebi.ac.uk/metagenomics/studies/MGYS00002008#overview>`_ Find more information about the `TARA Ocean Project. <https://fondationtaraocean.org/en/expedition/tara-oceans/>`_
 
-- Fetching data and preprocessing (MGnifyR)
-- Normalization, alpha diversity indices and taxonomic profiles visualization (phyloseq)
-- Comparative metagenomics at community-level: Beta diversity (vegan)
-- Detection of differentially abundant taxa (SIAMCAT)
+The excercises are organized in 4 main sections:
+
+1. Fetching data and preprocessing (MGnifyR)
+2. Normalization, alpha diversity indices and taxonomic profiles visualization (phyloseq)
+3. Comparative metagenomics at community-level: Beta diversity (vegan)
+4. Detection of differentially abundant taxa (SIAMCAT)
 
 
 Comparative metagenomics hands-on exercises
-#################################
+###########################################
 
 The practice has been prepared in a Jupyter Notebook.
 
