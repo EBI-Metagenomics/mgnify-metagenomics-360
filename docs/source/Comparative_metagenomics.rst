@@ -35,4 +35,4 @@ Blue boxes:
 	* Tips: Information useful for results interpretation
 
 
-Today's Notebook is "Day 5".
+Today's Notebook is "Comparative_Metagenomics_practice".
