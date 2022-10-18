@@ -24,6 +24,8 @@ The practice has been prepared in a Jupyter Notebook.
 
 .. include:: partials/jupyter.rst
 
+|action| Find and open Comparative metagenomics notebook in the 'notebooks' directory and change the kernel to 'R' 
+
 |info| The notebook has colored boxes to indicate relevant steps in the analysis or to introduce material for discussion.
 
 Yellow boxes:
@@ -34,5 +36,4 @@ Blue boxes:
 	* Notes: Informative boxes about the running command
 	* Tips: Information useful for results interpretation
 
-
-Today's Notebook is "Comparative_Metagenomics_practice".
+|info| To leave the notebook, you can save the changes and close the window. Type CTRL+C to terminate the process at the terminal.
