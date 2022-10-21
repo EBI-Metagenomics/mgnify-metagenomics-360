@@ -19,9 +19,10 @@ Open a Terminal.
 (base) conda activate metagenomics
 
 (metagenomics) pip install -r requirements.txt
-(metagenomics) conda install -c r r-irkernel
+(metagenomics) conda install -c conda-forge r-irkernel
+(metagenomics) conda install -c conda-forge r-tidyverse
 (metagenomics) conda install -c conda-forge r-devtools
-(metagenomics) ipython kernel install --name "mgnify-ebi-2022" --user
+(metagenomics) conda install ipykernel
 (metagenomics) R
 ```
 
