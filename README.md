@@ -15,11 +15,23 @@ We will have to install the dependencies to run the notebooks. To do so, we will
 Open a Terminal.
 
 ```shell
-(base) conda create -n metagenomics -f environment.yml
+(base) conda env create -n metagenomics -f environment.yml
 (base) conda activate metagenomics
 
 (metagenomics) pip install -r requirements.txt
-(metagenomics) ipython kernel install --name "mgnify-ebi-2021" --user
+(metagenomics) conda install -c r r-irkernel
+(metagenomics) conda install -c conda-forge r-devtools
+(metagenomics) ipython kernel install --name "mgnify-ebi-2022" --user
+(metagenomics) R
+```
+
+```R
+> devtools::install_github("beadyallen/MGnifyR")
+> install.packages("tidyverse")
+> quit()
+```
+
+```shell
 (metagenomics) jupyter-lab course.jupyterlab-workspace
 ```
 
