@@ -5,27 +5,12 @@ Viral detection and classification
 Prerequisites
 ---------------
 
-IMPORTANT: It is strongly recommended that you complete section 1.1 below (setting up the computing environment) prior to the practical session. Depending on your available network it can take some time (1-2 hrs) to download the necessary files.
-
-|image3|\  1.1. To run this tutorial first we need to set up our computing environment in order to execute the commands as listed here. First, download and the **virify_tutorial.tar.gz** file containing all the data you will need using any of the following options:
-
-.. code-block:: bash
-
-    wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify_courses/biata_2021/virify_tutorial.tar.gz
-    or
-    rsync -av --partial --progress rsync://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify_courses/biata_2021/virify_tutorial.tar.gz .
-
-Once downloaded, extract the files from the tarball:
+To begin the practical we need to setup our docker container.
+Change into the **virify_tutorial** directory and setup the environment by running the following commands in your current terminal session:
 
 .. code-block:: bash
 
-    tar -xzvf virify_tutorial.tar.gz
-    
-Now change into the **virify_tutorial** directory and setup the environment by running the following commands in your current terminal session:
-
-.. code-block:: bash
-
-    cd virify_tutorial
+    cd /home/training/virify_tutorial
     docker load --input docker/virify.tar
     docker run --rm -it -v $(pwd)/data:/opt/data virify
     mkdir obs_results
@@ -56,11 +41,25 @@ Note: if there are any issues in running this tutorial, there is a separate dire
 
     VirFinder_analysis_Euk.R -f obs_results/ERR575691_host_filtered_filt500bp.fasta -o obs_results
 
-|image3|\  1.4. Following the execution of the R script you will see a tabular file (**obs_results/ERR575691_host_filtered_filt500bp_VirFinder_table-all.tab**) that collates the results obtained for each contig from the processed FASTA file. The next step will be to analyse the metagenomic assembly using VirSorter. To do this run:
+|image3|\  1.4 Lets look at the outputs of VirFinder. Look at the plot in the image below.
+
+|image2|\
+
+|image1|\  As you can see there is a relationship between the **p-value** and the **score**. A higher score or lower p-value indicates a higher likelihood of the sequence being a viral sequence. You will also notice that the results correlate with the **contig length**. The curves are slightly different depending on whether the contigs are > or < than 3kb. This is because VirFinder uses different machine learning models at these different levels of length.
+
+You will see a tabular file (**obs_results/ERR575691_host_filtered_filt500bp_VirFinder_table-all.tab**) that collates the results obtained for each contig from the processed FASTA file.
+
+|image3|\  1.5. The next step will be to analyse the metagenomic assembly using VirSorter. This can take a while to run so it has been done for you. We will copy the results to our output directory.
 
 .. code-block:: bash
 
-    wrapper_phage_contigs_sorter_iPlant.pl -f obs_results/ERR575691_host_filtered_filt500bp.fasta --db 2 --wdir obs_results/virsorter_output --virome --data-dir /opt/data/databases/virsorter-data
+    cp -r exp_results/virsorter_output obs_results/
+
+If you wish to run this anytime after the practical, the following command can be used:
+
+    +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |wrapper_phage_contigs_sorter_iPlant.pl -f obs_results/ERR575691_host_filtered_filt500bp.fasta --db 2 --wdir obs_results/virsorter_output --virome --data-dir /opt/data/databases/virsorter-data |
+    +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 |image1|\  **VirSorter classifies its predictions into different confidence categories:**
 
@@ -68,12 +67,6 @@ Note: if there are any issues in running this tutorial, there is a separate dire
  - **Category 2**: "likely" predictions
  - **Category 3**: "possible" predictions
  - **Categories 4-6**: predicted prophages
-
-|image3|\  1.5. While VirSorter is running, we have prepared an R script so you can inspect the VirFinder results in the meantime using ggplot2. Open RStudio and load the **Analyse_VirFinder.R** script located in the **/virify_tutorial/data/scripts/** directory. Run the script (press Source on the top right corner) to generate the plot. (If you don't have RStudio, or don't care to run this you can just look at the resulting plot in the image below)
-
-|image2|\
-
-|image1|\  As you can see there is a relationship between the **p-value** and the **score**. A higher score or lower p-value indicates a higher likelihood of the sequence being a viral sequence. You will also notice that the results correlate with the **contig length**. The curves are slightly different depending on whether the contigs are > or < than 3kb. This is because VirFinder uses different machine learning models at these different levels of length.
 
 |image3|\  1.6. Once VirSorter finishes running, we then generate the corresponding viral sequence FASTA files using a custom python script (**parse_viral_pred.py**) as follows:
 
