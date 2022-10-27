@@ -63,7 +63,7 @@ Let's browse the files that we have prepared:
     cd /opt/data/assemblies/
     ls
 
-Here are the files you should find in this directory:
+You should find the following files in this directory:
 
 ``contigs.fasta``: *a file containing the primary metagenome assembly produced by metaSPAdes (contigs that haven't been binned)*
 ``input.fastq.sam.bam``: *a pre-generated file that contains reads mapped back to contigs*
@@ -73,6 +73,10 @@ To generate the ``input.fastq.sam.bam`` file yourself, you would run the followi
 .. code-block:: bash
 
     cd /opt/data/assemblies/
+    
+    # if you would like to practice this now, back up the input.fastq.sam.bam file that we provided first, 
+    # as these steps will take a while:
+    mv input.fastq.sam.bam input.fastq.sam.bam.bak
     
     # index the contigs file that was produced by metaSPAdes:
     bwa index contigs.fasta
