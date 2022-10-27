@@ -1,9 +1,9 @@
 .. include:: partials/substitutions.rst
 
-EBI - Metagenomics bioinformatics (Virtual) - 2021
+EBI - Genome-resolved metagenomics (Virtual) - 2022
 ==================================================
 
-These are the materials that will be used for the "Metagenomics bioinformatics (Virtual)" workshop.
+These are the materials that will be used for the "Genome-resolved metagenomics (Virtual)" workshop.
 
 Overview
 ^^^^^^^^
@@ -24,3 +24,4 @@ Contents:
    mag-catalogues
    license
    virify
+   Comparative_metagenomics

@@ -3,7 +3,7 @@ MAG generation
 ***************
 
 - Generation of metagenome assembled genomes (MAGs) from assemblies
-- Assessment of quality (MIGMAGs)
+- Assessment of quality (MIMAGs)
 - Taxonomic assignment
 
 Prerequisites
@@ -15,14 +15,8 @@ For this tutorial you will need to first start the docker container by running:
 
     sudo docker run --rm -it -v /home/training/Data/Binning:/opt/data microbiomeinformatics/mgnify-ebi-2020-binning
 
+*password: training*
 
-.. note::
-   It's possible that the docker image is not available in dockerhub.
-   In that case you can build the container using the `Dockerfile <https://github.com/EBI-Metagenomics/mgnify-ebi-2020/blob/master/docs/source/data/binning/Dockerfile>`_
-   
-   To build the container, download the Dockerfile and run "docker build -t microbiomeinformatics/mgnify-ebi-2020-binning ." in the folder that contains the Dockerfile.
-
-password: training
 
 Generating metagenome assembled genomes
 ----------------------------------------
@@ -53,30 +47,51 @@ is summarised in Figure 1.
 
 Figure 1. MetaBAT workflow (Kang, et al. *PeerJ* 2015).
 
+
+**Preparing to run MetaBAT**
+
 |image1|\  Prior to running MetaBAT, we need to generate coverage
 statistics by mapping reads to the contigs. To do this, we can use bwa
 (http://bio-bwa.sourceforge.net/) and then the samtools software
 (`http://www.htslib.org <http://www.htslib.org/>`__) to reformat the
-output. Again, this can take some time, so we have run it in advance. To
-repeat the process, you would run the following commands:
+output. This can take some time, so we have run it in advance. 
+
+|image3|\  Let's browse the files that we have prepared:
+
+.. code-block:: bash
+
+    cd /opt/data/assemblies/
+    ls
+
+You should find the following files in this directory:
+
+``contigs.fasta``: *a file containing the primary metagenome assembly produced by metaSPAdes (contigs that haven't been binned)*
+``input.fastq.sam.bam``: *a pre-generated file that contains reads mapped back to contigs*
+
+To generate the ``input.fastq.sam.bam`` file yourself, you would run the following commands:
 
 .. code-block:: bash
 
     cd /opt/data/assemblies/
     
+    # if you would like to practice this now, back up the input.fastq.sam.bam file that we provided first, 
+    # as these steps will take a while:
+    mv input.fastq.sam.bam input.fastq.sam.bam.bak
+    
     # index the contigs file that was produced by metaSPAdes:
     bwa index contigs.fasta
+    
+    # fetch the reads from ENA
+    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR011/ERR011322/ERR011322_1.fastq.gz
+    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR011/ERR011322/ERR011322_2.fastq.gz
 
     # map the original reads to the contigs:
     bwa mem contigs.fasta ERR011322_1.fastq ERR011322_2.fastq > input.fastq.sam
 
     # reformat the file with samtools:
     samtools view -Sbu input.fastq.sam > junk 
-    samtools sort junk input.fastq.sam
+    samtools sort junk input.fastq.sam.bam
 
-We should now have the files we need for the rest of the process – the
-assemblies themselves (*contigs.fasta*) and a file from which we can
-generate the coverage stats (*input.fastq.sam.bam).*
 
 **Running MetaBAT**
 
@@ -90,7 +105,7 @@ generate the coverage stats (*input.fastq.sam.bam).*
 In this case, the directory might already be part of your VM, so do not worry if you get an error saying the directory already exists. You can move on to the next step.
 
 |image3|\  Run the following command to produce a
-*contigs.fasta.depth.txt* file, summarising the output depth for use with
+``contigs.fasta.depth.txt`` file, summarising the output depth for use with
 MetaBAT:
 
 .. code-block:: bash
@@ -103,7 +118,9 @@ MetaBAT:
 
     metabat2 --inFile  contigs.fasta --outFile contigs.fasta.metabat-bins2000/bin --abdFile contigs.fasta.depth.txt --minContig 2000
 
-|image3|\ Once the binning process is complete, each bin will be
+|image1|\ We set the minimum contig size to 2000 using the ``--minContig`` parameter 
+
+|image1|\ Once the binning process is complete, each bin will be
 grouped into a multi-fasta file with a name structure of
 **bin.[0-9].fa**.
 
@@ -151,7 +168,7 @@ Now run CheckM with the following command:
     checkm lineage_wf -x fa contigs.fasta.metabat-bins2000 checkm_output --tab_table -f MAGs_checkm.tab --reduced_tree -t 4
 
 Due to memory constraints (< 40 GB), we have added the option
-**--reduced_tree** to build the phylogeny with a reduced number of
+``--reduced_tree`` to build the phylogeny with a reduced number of
 reference genomes.
 
 Once the **lineage_wf** analysis is done, the reference tree can be
@@ -184,6 +201,7 @@ To do this, run the following command:
 
 .. code-block:: bash
 
+    cd /opt/data/
     nw_rename checkm_answers/concatenated.tre assemblies/rename_list.tab > renamed.tree
 
 **Visualising the phylogenetic tree**
@@ -196,7 +214,7 @@ of Life** (**iTOL**): http://itol.embl.de/index.shtml
 reformat the tree with **FigTree**
 (http://tree.bio.ed.ac.uk/software/figtree/).
 
-In order to open **FigTree** open a new terminal window (without docker) and type ``figtree``
+|image3|\  In order to open **FigTree**, open a new terminal window (without docker) and type ``figtree``
 
 |image3|\  Open the **renamed.tree** file with **FigTree** (**File -> Open**) and then
 select from the toolbar **File -> Export Trees**. In the **Tree file
