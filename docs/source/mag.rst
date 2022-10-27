@@ -65,10 +65,10 @@ Let's browse the files that we have prepared:
 
 Here are the files you should find in this directory:
 
-``contigs.fasta``: a file containing the primary metagenome assembly produced by metaSPAdes (contigs that haven't been binned)
-``input.fastq.sam``: a pre-generated file with reads mapped back to contigs
+``contigs.fasta``: *a file containing the primary metagenome assembly produced by metaSPAdes (contigs that haven't been binned)*
+``input.fastq.sam.bam``: *a pre-generated file that contains reads mapped back to contigs*
 
-To generate the ``input.fastq.sam`` file yourself, you would run the following commands:
+To generate the ``input.fastq.sam.bam`` file yourself, you would run the following commands:
 
 .. code-block:: bash
 
@@ -76,13 +76,17 @@ To generate the ``input.fastq.sam`` file yourself, you would run the following c
     
     # index the contigs file that was produced by metaSPAdes:
     bwa index contigs.fasta
+    
+    # fetch the reads from ENA
+    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR011/ERR011322/ERR011322_1.fastq.gz
+    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR011/ERR011322/ERR011322_2.fastq.gz
 
     # map the original reads to the contigs:
     bwa mem contigs.fasta ERR011322_1.fastq ERR011322_2.fastq > input.fastq.sam
 
     # reformat the file with samtools:
     samtools view -Sbu input.fastq.sam > junk 
-    samtools sort junk input.fastq.sam
+    samtools sort junk input.fastq.sam.bam
 
 
 **Running MetaBAT**
