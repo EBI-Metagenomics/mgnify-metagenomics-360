@@ -38,21 +38,15 @@ and the use of MEGAHIT for performing co-assembly.
 
     cd /home/training/Assembly/
 
-Also we need to activate the conda enviroment we created earlier:
-
-.. code-block:: bash
-
-    conda activate assembly
-
 
 |image1|\ To run metaspades you would execute the following commands (but don't run it now!): 
 
 .. code-block:: bash
 
     mkdir assembly
-    metaspades.py -t 4 --only-assembler -m 10 -1 oral_human_example_1_splitaa.fastq -2 oral_human_example_2_splitaa.fastq -o spades_out
+    metaspades.py -t 4 --only-assembler -m 10 -1 reads/oral_human_example_1_splitaa_kneaddata_paired_1.fastq -2 reads/oral_human_example_1_splitaa_kneaddata_paired_2.fastq -o spades_out
 
-|image2|\ Since the assembly process would take ~1h we are just going to analyse the output present in spades_out. Let's look at the contigs.fasta file.  
+|image2|\ Since the assembly process would take ~1h we are just going to analyse the output present in "assembly.bak". Let's look at the "contigs.fasta" file.  
 
 For this, take the first 40 lines of the sequence and perform a blast search
 at NCBI (https://blast.ncbi.nlm.nih.gov/Blast.cgi, choose
@@ -62,7 +56,7 @@ perform the following:
 
 .. code-block:: bash
 
-    head -41 spades_out/contigs.fasta
+    head -41 assembly.bak/contigs.fasta
 
 |image8|\
 
@@ -74,7 +68,7 @@ result at all?
 
 .. code-block:: bash
 
-    assembly_stats spades_out/scaffolds.fasta
+    assembly_stats assembly.bak/scaffolds.fasta
 
 |image1|\ This will output two simple tables in JSON format, but it is
 fairly simple to read. There is a section that corresponds to the
@@ -114,7 +108,7 @@ In the the Bandage GUI perform the following
 
     Select File -> Load graph
 
-    Navigate to Home -> training -> Data -> Assembly -> files -> spades_out and open the file assembly_graph_after_simplification.gfa
+    Navigate to Home -> training -> Data -> Assembly -> files -> assembly.bak and open the file assembly_graph_after_simplification.gfa
 
 Once loaded, you need to draw the graph. To do so, under the “Graph
 drawing” panel on the left side perform the following:
@@ -129,46 +123,12 @@ each distinct part of the assembly graph.
 |image3|\ Can you find any large, complex parts of the graph? If so,
 what do they look like. 
 
-|image2|\  In this particular sample, we believe that strains related to
-the species *Rothia dentocariosa,* a Gram-positive, round- to rod-shaped
-bacteria that is part of the normal community of microbes residing in
-the mouth and respiratory tract, should be present in our sample. While
-this is a tiny dataset, lets try to see if there is evidence for this
-genome. To do so, we will search the *R. dentocariosa* genome against
-the assembly graph.
-
-To do so, go to the 'BLAST' panel on the left side of the GUI.
-
-    Step 1 - Select 'Create/view BLAST search', this will open a new window    
-    
-    Step 2 - Select 'build Blast database'
-    
-    Step 3 - Load from FASTA file. Navigate to the genome folder: Home -> training -> Data -> Assembly -> files -> genome and select GCA_000164695.2.fasta
-    
-    Step 4 - Modify the BLAST filters to 95% identity
-    
-    Step 5 - Run BLAST
-    
-    Step 6 - Close this window
-
-To visualise just these hits, go back to "Graph drawing” panel. 
-
-    Set Scope to ‘Around BLAST hits’
-    
-    Set Distance 2
-    
-    The click on 'Draw graph'
-
-You should then see something like this:
-
-|image9|\
-
 
 |image1|\ For the long-reads assembly we will use Flye:
 
 .. code-block:: bash
     
-    flye --nano-raw nanopore_subset.fastq --out-dir flye_out --threads 4
+    flye --nano-raw reads/oral_human_example_1_splitaa_kneaddata_paired_1.fastq --out-dir flye_out --threads 4
 
 
 |image3|\  How do these assemblies differ to the one generated previously with metaSPAdes?
@@ -181,30 +141,29 @@ performing co-assembly of multiple datasets. Each should take about 15-20 min. I
 
 .. code-block:: bash
     
-    cd /home/training/Assembly/coassembly
-    rm -rf assembly*
+    cd /home/training/Assembly/coassembly.bak
 
 |image2|\ Then, perform the coassemblies with MEGAHIT, as follows:
 
 .. code-block:: bash
 
-    megahit -1 sample3/sample3_R1.fastq -2 sample3/sample3_R2.fastq -o  assembly1 -t 4 --k-list 23,51,77 
+    megahit -1 ../reads/oral_human_example_1_splitaa_kneaddata_paired_1.fastq -2 ../reads/oral_human_example_1_splitaa_kneaddata_paired_2.fastq -o  assembly1_new -t 4 --k-list 23,51,77 
 
 .. code-block:: bash
 
-    megahit -1 sample3/sample3_R1.fastq,sample4/sample4_R1.fastq -2 sample3/sample3_R2.fastq,sample4/sample4_R2.fastq -o assembly2 -t 4 --k-list 23,51,77 
+    megahit -1 ../reads/oral_human_example_1_splitaa_kneaddata_paired_1.fastq,../reads/oral_human_example_1_splitab_kneaddata_paired_1.fastq -2 ../reads/oral_human_example_1_splitaa_kneaddata_paired_2.fastq,../reads/oral_human_example_1_splitab_kneaddata_paired_2.fastq -o assembly2_new -t 4 --k-list 23,51,77 
 
 .. code-block:: bash
 
-    megahit -1 sample3/sample3_R1.fastq,sample4/sample4_R1.fastq,sample5/sample5_R1.fastq -2 sample3/sample3_R2.fastq,sample4/sample4_R2.fastq,sample5/sample5_R2.fastq -o assembly3 -t 4 --k-list 23,51,77   
+    megahit -1 ../reads/oral_human_example_1_splitaa_kneaddata_paired_1.fastq,../reads/oral_human_example_1_splitab_kneaddata_paired_1.fastq,../reads/oral_human_example_1_splitac_kneaddata_paired_1.fastq -2 ../reads/oral_human_example_1_splitaa_kneaddata_paired_2.fastq,../reads/oral_human_example_1_splitab_kneaddata_paired_2.fastq,../reads/oral_human_example_1_splitac_kneaddata_paired_2.fastq -o assembly3_new -t 4 --k-list 23,51,77   
 
 |image2|\ You should now have three different assemblies, let us compare the results.
 
 .. code-block:: bash
 
-    assembly_stats assembly1/final.contigs.fa
-    assembly_stats assembly2/final.contigs.fa
-    assembly_stats assembly3/final.contigs.fa
+    assembly_stats assembly1_new/final.contigs.fa
+    assembly_stats assembly2_new/final.contigs.fa
+    assembly_stats assembly3_new/final.contigs.fa
     
 |image3|\  How do these assemblies differ to the one generated previously with metaSPAdes? Which one do you think is best?
 
