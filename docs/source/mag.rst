@@ -168,7 +168,7 @@ Now run CheckM with the following command:
     checkm lineage_wf -x fa contigs.fasta.metabat-bins2000 checkm_output --tab_table -f MAGs_checkm.tab --reduced_tree -t 4
 
 Due to memory constraints (< 40 GB), we have added the option
-**--reduced_tree** to build the phylogeny with a reduced number of
+``--reduced_tree`` to build the phylogeny with a reduced number of
 reference genomes.
 
 Once the **lineage_wf** analysis is done, the reference tree can be
