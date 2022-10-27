@@ -56,7 +56,7 @@ statistics by mapping reads to the contigs. To do this, we can use bwa
 (`http://www.htslib.org <http://www.htslib.org/>`__) to reformat the
 output. This can take some time, so we have run it in advance. 
 
-Let's browse the files that we have prepared:
+|image3|\  Let's browse the files that we have prepared:
 
 .. code-block:: bash
 
@@ -118,7 +118,9 @@ MetaBAT:
 
     metabat2 --inFile  contigs.fasta --outFile contigs.fasta.metabat-bins2000/bin --abdFile contigs.fasta.depth.txt --minContig 2000
 
-|image3|\ Once the binning process is complete, each bin will be
+|image1|\ We set the minimum contig size to 2000 using the ``--minContig`` parameter 
+
+|image1|\ Once the binning process is complete, each bin will be
 grouped into a multi-fasta file with a name structure of
 **bin.[0-9].fa**.
 
