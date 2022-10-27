@@ -213,7 +213,7 @@ of Life** (**iTOL**): http://itol.embl.de/index.shtml
 reformat the tree with **FigTree**
 (http://tree.bio.ed.ac.uk/software/figtree/).
 
-In order to open **FigTree** open a new terminal window (without docker) and type ``figtree``
+|image3|\  In order to open **FigTree**, open a new terminal window (without docker) and type ``figtree``
 
 |image3|\  Open the **renamed.tree** file with **FigTree** (**File -> Open**) and then
 select from the toolbar **File -> Export Trees**. In the **Tree file
