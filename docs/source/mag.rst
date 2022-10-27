@@ -3,7 +3,7 @@ MAG generation
 ***************
 
 - Generation of metagenome assembled genomes (MAGs) from assemblies
-- Assessment of quality (MIGMAGs)
+- Assessment of quality (MIMAGs)
 - Taxonomic assignment
 
 Prerequisites
@@ -15,14 +15,8 @@ For this tutorial you will need to first start the docker container by running:
 
     sudo docker run --rm -it -v /home/training/Data/Binning:/opt/data microbiomeinformatics/mgnify-ebi-2020-binning
 
+*password: training*
 
-.. note::
-   It's possible that the docker image is not available in dockerhub.
-   In that case you can build the container using the `Dockerfile <https://github.com/EBI-Metagenomics/mgnify-ebi-2020/blob/master/docs/source/data/binning/Dockerfile>`_
-   
-   To build the container, download the Dockerfile and run "docker build -t microbiomeinformatics/mgnify-ebi-2020-binning ." in the folder that contains the Dockerfile.
-
-password: training
 
 Generating metagenome assembled genomes
 ----------------------------------------
@@ -53,12 +47,28 @@ is summarised in Figure 1.
 
 Figure 1. MetaBAT workflow (Kang, et al. *PeerJ* 2015).
 
+
+**Preparing to run MetaBAT**
+
 |image1|\  Prior to running MetaBAT, we need to generate coverage
 statistics by mapping reads to the contigs. To do this, we can use bwa
 (http://bio-bwa.sourceforge.net/) and then the samtools software
 (`http://www.htslib.org <http://www.htslib.org/>`__) to reformat the
-output. Again, this can take some time, so we have run it in advance. To
-repeat the process, you would run the following commands:
+output. This can take some time, so we have run it in advance. 
+
+Let's browse the files that we have prepared:
+
+.. code-block:: bash
+
+    cd /opt/data/assemblies/
+    ls
+
+Here are the files you should find in this directory:
+
+``contigs.fasta``: a file containing the primary metagenome assembly produced by metaSPAdes (contigs that haven't been binned)
+``input.fastq.sam``: a pre-generated file with reads mapped back to contigs
+
+To generate the ``input.fastq.sam`` file yourself, you would run the following commands:
 
 .. code-block:: bash
 
@@ -74,9 +84,6 @@ repeat the process, you would run the following commands:
     samtools view -Sbu input.fastq.sam > junk 
     samtools sort junk input.fastq.sam
 
-We should now have the files we need for the rest of the process – the
-assemblies themselves (*contigs.fasta*) and a file from which we can
-generate the coverage stats (*input.fastq.sam.bam).*
 
 **Running MetaBAT**
 
