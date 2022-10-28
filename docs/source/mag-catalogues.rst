@@ -10,8 +10,8 @@ In the presentation we will cover:
 - Overview of MGnify MAG Catalogues
 - Annotations available for catalogues and genomes
 - Metadata available for catalogues and genomes
-- Download files available for catalogues and genomes, via web, FTP, and the API
 - Search mechanisms available against catalogues
+- How MAG catalogues fit into the rest of the MGnify service
 
 MAG Catalogues hands-on exercises
 #################################
@@ -28,13 +28,13 @@ Do you have MAGs?
 
 |info| For the last few exercises, you need some MAGs.
 If you didn’t get as far as making your own MAGs in the :ref:`mag:MAG Generation` exercises,
-you can copy some we made earlier with this command in a Terminal:
+there should already be some in `/home/training/Binning/contigs.fasta.metabat-bins2000.bak`.
+
+If you accidentally damaged those files, you can copy some from the shared drive:
 
 .. code-block:: bash
 
-    cp -r /media/penelopeprime/Metagenomics-Nov21/Day4/day-4-example-mag-bins/* ~/mags
-
-If you DID make your own, copy them to :code:`~/mags`.
+    cp -r /media/penelopeprime/Metagenomics-Nov21/Day4/day-4-example-mag-bins/* /home/training/Binning/contigs.fasta.metabat-bins2000.bak/`
 
 .. include:: partials/jupyter.rst
 
