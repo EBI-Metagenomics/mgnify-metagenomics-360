@@ -308,7 +308,7 @@ This assembly file contains only a subset of the contigs for the purpose of this
 
     cd /opt/data
     gunzip -c freshwater_sediment_contigs.fa.gz > freshwater_sediment_contigs.fa
-    blastn -query freshwater_sediment_contigs.fa -db decontamination_test/phix_blastDB -task megablast -word_size 28 -best_hit_overhang 0.1 -best_hit_score_edge 0.1 -dust yes -evalue 0.0001 -min_raw_gapped_score 100 -penalty -5 -soft_masking true -window_size 100 -outfmt 6 -out freshwater_blast_out.txt
+    blastn -query freshwater_sediment_contigs.fa -db decontamination/phix_blastDB -task megablast -word_size 28 -best_hit_overhang 0.1 -best_hit_score_edge 0.1 -dust yes -evalue 0.0001 -min_raw_gapped_score 100 -penalty -5 -soft_masking true -window_size 100 -outfmt 6 -out freshwater_blast_out.txt
 
 |image1|\ The blast options are:
 
