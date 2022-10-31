@@ -47,8 +47,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Metagenomics bioinformatics (Virtual) - 2021'
-copyright = u'2021, EMBL-EBI'
+project = u'Genome-resolved metagenomics bioinformatics (Virtual) - 2022'
+copyright = u'2022, EMBL-EBI'
 author = u'Microbiome Informatics Team - EMBL-EBI'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -269,7 +269,7 @@ texinfo_documents = [
 epub_title = 'Metagenomics Workshop'
 epub_author = 'MGnify team'
 epub_publisher = 'MGnify team'
-epub_copyright = '2021, EMBL-EBI'
+epub_copyright = '2022, EMBL-EBI'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = 'Metagenomics Workshop'
