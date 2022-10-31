@@ -140,7 +140,11 @@ Let’s inspect the results. Do:
 
 You should see a list of **9 contigs** detected as viral and their taxonomic annotation in separate columns (partitioned by taxonomic rank). However, some do not have an annotation (e.g. **NODE_4...** and **NODE_5...**).
 
-Open the gene map PDF files of the corresponding contigs to understand why some contigs were **not assigned** to a taxonomic lineage. You will see that for these cases, either there were not enough genes matching the HMMs, or there was disagreement in their assignment.
+|image2|\  Now on your computer on the left hand bar, select the folder icon.
+
+Navigate to Home --> virify_tutorial --> obs_results
+
+    Open the gene map PDF files of the corresponding contigs to understand why some contigs were **not assigned** to a taxonomic lineage. You will see that for these cases, either there were not enough genes matching the HMMs, or there was disagreement in their assignment.
 
 |image5|\
 

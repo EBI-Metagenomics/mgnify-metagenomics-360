@@ -123,7 +123,7 @@ In this case, we provide the folder containing the fastqc results to
 multiqc and the -o allows us to set the output directory for this
 summarised report.
 
-|image2|\  Now on your computer on the left hand bar, select the folder icon called.
+|image2|\  Now on your computer on the left hand bar, select the folder icon.
 
 Navigate to Home --> quality --> multiqc_results
 
