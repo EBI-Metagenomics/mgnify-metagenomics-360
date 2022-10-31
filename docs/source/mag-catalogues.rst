@@ -23,6 +23,14 @@ This builds on the exercises you looked at in the :ref:`services:API` practical.
 
 The practical will use a Jupyter Notebook.
 
+Fetch the code repository
+-------------------------
+
+.. code-block:: bash
+
+    cd /home/training
+    git clone https://github.com/EBI-Metagenomics/genome-resolved-metagenomics-2022.git
+
 Do you have MAGs?
 -----------------
 

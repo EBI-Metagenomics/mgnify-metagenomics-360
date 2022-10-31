@@ -7,7 +7,7 @@ Opening the Jupyter notebook
 
 .. code-block:: bash
 
-    cd /media/penelopeprime/genome-resolved-metagenomics-2022/genome-resolved-metagenomics-2022
+    cd /home/training/genome-resolved-metagenomics-2022
 
     conda activate metagenomics
 
