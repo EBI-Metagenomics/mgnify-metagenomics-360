@@ -11,7 +11,6 @@ Change into the **virify_tutorial** directory and setup the environment by runni
 .. code-block:: bash
 
     cd /home/training/virify_tutorial
-    docker load --input docker/virify.tar
     docker run --rm -it -v $(pwd)/data:/opt/data virify
     mkdir obs_results
     
@@ -35,7 +34,7 @@ Note: if there are any issues in running this tutorial, there is a separate dire
 
     filter_contigs_len.py -f ERR575691_host_filtered.fasta -l 0.5 -o obs_results/ERR575691_host_filtered_filt500bp.fasta
 
-|image3|\  1.3. The output from this command is a file named **ERR575691_host_filtered_filt500bp.fasta** which is located in the **obs_results** diretory. Our dataset is now ready to be processed for the detection of putative viral sequences. We will first analyse it with VirFinder using a custom R script:
+|image3|\  1.3. The output from this command is a file named **ERR575691_host_filtered_filt500bp.fasta** which is located in the **obs_results** directory. Our dataset is now ready to be processed for the detection of putative viral sequences. We will first analyse it with VirFinder using a custom R script:
 
 .. code-block:: bash
 
@@ -68,7 +67,7 @@ If you wish to run this anytime after the practical, the following command can b
  - **Category 3**: "possible" predictions
  - **Categories 4-6**: predicted prophages
 
-|image3|\  1.6. Once VirSorter finishes running, we then generate the corresponding viral sequence FASTA files using a custom python script (**parse_viral_pred.py**) as follows:
+|image3|\  1.6. We then generate the corresponding viral sequence FASTA files using a custom python script (**parse_viral_pred.py**) as follows:
 
 .. code-block:: bash
 
@@ -89,11 +88,19 @@ Following the execution of this command, FASTA files (*.fna) will be generated f
 
 |image1|\  Once we have retrieved the putative viral sequences from the metagenomic assembly, the following step will be to analyse the proteins encoded in them in order to identify any viral taxonomic markers. To carry out this identification, we will employ a database of **profile Hidden Markov Models (HMMs)** built from proteins encoded in viral reference genomes. These profile HMMs were selected as viral taxonomic markers following a comprehensive random forest-based analysis carried out previously. 
 
-|image3|\  2.1. The VIRify pipeline uses **prodigal** for the detection of **protein coding sequences (CDSs**) and **hmmscan** for the alignment of the encoded proteins to each of the profile HMMs stored in the aforementioned database. We will use the custom script **Generate_vphmm_hmmer_matrix.py** to conduct these steps for each one of the FASTA files sequentially in a “for loop”. In your terminal session, execute the following command:
+|image3|\  2.1. The VIRify pipeline uses **prodigal** for the detection of **protein coding sequences (CDSs**) and **hmmscan** for the alignment of the encoded proteins to each of the profile HMMs stored in the aforementioned database. We will use the custom script **Generate_vphmm_hmmer_matrix.py** to conduct these steps for each one of the FASTA files sequentially in a “for loop”. This takes a while to run so we'll copy over these results too.
 
 .. code-block:: bash
 
-    for file in $(find obs_results/ -name '*.fna' -type f | grep -i 'putative'); do Generate_vphmm_hmmer_matrix.py -f ${file} -o ${file%/*}; done
+    cp exp_results/*CDS.faa obs_results/
+    cp exp_results/*hmmer_ViPhOG.tbl obs_results/
+
+If you wish to run this anytime after the practical, the following command can be used:
+
+    +----------------------------------------------------------------------------------------------------------------------------------------------+
+    |for file in $(find obs_results/ -name '*.fna' -type f | grep -i 'putative'); do Generate_vphmm_hmmer_matrix.py -f ${file} -o ${file%/*}; done |
+    +----------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 Once the command execution finishes two new files will be stored for each category of viral predictions. The file with the suffix **CDS.faa** lists the proteins encoded in the CDSs reported by prodigal, whereas the file with the suffix **hmmer_ViPhOG.tbl** contains all significant alignments between the encoded proteins and the profile HMMs, on a per-domain-hit basis. 
 
