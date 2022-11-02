@@ -26,11 +26,38 @@ The excercises are organized in 4 main sections:
 Comparative metagenomics hands-on exercises
 ###########################################
 
-The practice has been prepared in a Jupyter Notebook.
+The practice has been prepared in a Jupyter Notebook. if you cloned the repo yesterday:
 
-.. include:: partials/jupyter.rst
 
-|action| Find and open Comparative metagenomics notebook in the 'notebooks' directory and change the kernel to 'R' 
+Opening the Jupyter notebook
+----------------------------
+
+|action| Open a new Terminal and type these commands to enter the repository:
+
+.. code-block:: bash
+
+    cd /home/training/genome-resolved-metagenomics-2022
+
+    conda activate metagenomics
+
+    jupyter-lab course.jupyterlab-workspace
+    
+|info| If you didn't clone the repo yesterday:
+
+.. code-block:: bash
+
+    cd /home/training/
+    
+    git clone https://github.com/EBI-Metagenomics/genome-resolved-metagenomics-2022.git
+
+    cd genome-resolved-metagenomics-2022
+    
+    conda activate metagenomics
+    
+    jupyter-lab course.jupyterlab-workspace
+    
+    
+|action| Find and open Comparative metagenomics notebook in the 'notebooks' directory 
 
 |info| The notebook has colored boxes to indicate relevant steps in the analysis or to introduce material for discussion.
 
