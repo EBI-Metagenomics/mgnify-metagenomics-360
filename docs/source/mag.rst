@@ -78,6 +78,9 @@ To generate the ``input.fastq.sam.bam`` file yourself, you would run the followi
     # as these steps will take a while:
     mv input.fastq.sam.bam input.fastq.sam.bam.bak
     
+    # NOTE: you will not be able to run subsequent steps before this workflow is completed because you need
+    # the input.fastq.sam.bam file to calculate contig depth in the next step
+    
     # index the contigs file that was produced by metaSPAdes:
     bwa index contigs.fasta
     
