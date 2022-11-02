@@ -220,7 +220,7 @@ reformat the tree with **FigTree**
 
 |image3|\  In order to open **FigTree**, open a new terminal window (without docker) and type ``figtree``
 
-|image3|\  Open the **renamed.tree** file with **FigTree** (**File -> Open**) and then
+|image3|\  Open the **renamed.tree** file with **FigTree** (**File -> Open**) (file is in ``/home/training/Binning``) and then
 select from the toolbar **File -> Export Trees**. In the **Tree file
 format** select **Newick** and export the file as **renamed.nwk** (or choose a name you will recognise if you plan to use the shared account described below).
 
