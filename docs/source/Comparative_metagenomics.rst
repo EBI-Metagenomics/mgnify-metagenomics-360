@@ -36,7 +36,7 @@ Opening the Jupyter notebook
 
 .. code-block:: bash
 
-    cd /home/training/
+    cd /home/training/ && mkdir comparative && cd comparative
     
     git clone https://github.com/EBI-Metagenomics/genome-resolved-metagenomics-2022.git
 
