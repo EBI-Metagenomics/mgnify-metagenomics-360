@@ -32,17 +32,7 @@ The practice has been prepared in a Jupyter Notebook. if you cloned the repo yes
 Opening the Jupyter notebook
 ----------------------------
 
-|action| Open a new Terminal and type these commands to enter the repository:
-
-.. code-block:: bash
-
-    cd /home/training/genome-resolved-metagenomics-2022
-
-    conda activate metagenomics
-
-    jupyter-lab course.jupyterlab-workspace
-    
-|info| If you didn't clone the repo yesterday:
+|action| Open a new Terminal and type these commands to clone and enter the repository:
 
 .. code-block:: bash
 
