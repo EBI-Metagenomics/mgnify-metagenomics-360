@@ -26,7 +26,7 @@ The excercises are organized in 4 main sections:
 Comparative metagenomics hands-on exercises
 ###########################################
 
-The practice has been prepared in a Jupyter Notebook. if you cloned the repo yesterday:
+The practice has been prepared in a Jupyter Notebook available in the gihub repo.
 
 
 Opening the Jupyter notebook
