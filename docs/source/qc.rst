@@ -4,15 +4,7 @@ Quality control and filtering of the raw sequence files
 
 Preqrequisites
 ----------------
-
-There are no prerequisites to run this practical for the course. All the data and tools have been downloaded and installed on the VMs.
-
-**Skip to the next section "Quality control and filtering of the raw sequence files"**
-
-To run this practical locally after the course: see section "Running this practical locally" at the end of this document.
-
-Quality control and filtering of the raw sequence files
------------------------------------------------------------------
+These instructions are for the course VM. To run externally please see the section at the end.
 
 For this tutorial you will need to move into the working directory and start a docker container. It is important to set the variable DATADIR as stated.
 
@@ -31,6 +23,8 @@ Now start the docker container
 
     docker run --rm -it  -e DISPLAY=$DISPLAY  -v $DATADIR:/opt/data -v /tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY=unix$DISPLAY microbiomeinformatics/biata-qc-assembly:v2021
 
+Quality control and filtering of the raw sequence files
+-----------------------------------------------------------------
 
 |image1|\ Learning Objectives - in the following exercises you will learn
 how to check on the quality of short read sequences: identify the
@@ -398,6 +392,61 @@ e.g. "ILLUMINACLIP", where /opt/data/NexteraPE-PE is a file of adapters.
 
     cd /opt/data/skin
     <construct the required commands>
+
+Running the practical locally
+-------------------------------
+
+We need to first fetch the practical datasets.
+
+.. code-block:: bash
+
+    wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify_courses/ebi_2020/quality.tar.gz
+    or
+    rsync -av --partial --progress rsync://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify_courses/ebi_2020/quality.tar.gz .
+
+Once downloaded, extract the files from the tarball:
+
+.. code-block:: bash
+
+    tar -xzvf quality.tar.gz
+
+We also need the trimmomatic binary
+
+.. code-block:: bash
+
+    cd quality
+    wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.39.zip
+    unzip Trimmomatic-0.39.zip
+    cd ..
+
+Now pull the docker container and set the above quality directory as DATADIR.
+
+.. code-block:: bash
+
+    docker pull microbiomeinformatics/biata-qc-assembly:v2021
+    export DATADIR={path to quality directory}
+    xhost +
+
+You will see the message "access control disabled, clients can connect from any host"
+
+Now start the docker container
+
+.. code-block:: bash
+
+    docker run --rm -it  -e DISPLAY=$DISPLAY  -v $DATADIR:/opt/data -v /tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY=unix$DISPLAY microbiomeinformatics/biata-qc-assembly:v2021
+
+
+The container has the following tools installed:
+* kneaddata
+* fastqc
+* multiqc
+* blast
+* bowtie-2
+
+
+You can now continue this practical from the section "Quality control and filtering of the raw sequence files"
+
+
 
 
 .. |image1| image:: media/info.png

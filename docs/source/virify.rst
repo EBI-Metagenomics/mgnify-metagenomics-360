@@ -4,6 +4,7 @@ Viral detection and classification
 
 Prerequisites
 ---------------
+These instructions are for the course VM. To run externally please see the section at the end.
 
 To begin the practical we need to setup our docker container.
 Change into the **virify_tutorial** directory and setup the environment by running the following commands in your current terminal session:
@@ -147,13 +148,52 @@ Let’s inspect the results. Do:
 
 You should see a list of **9 contigs** detected as viral and their taxonomic annotation in separate columns (partitioned by taxonomic rank). However, some do not have an annotation (e.g. **NODE_4...** and **NODE_5...**).
 
-|image2|\  Now on your computer on the left hand bar, select the folder icon.
+|image3|\  Now on your computer on the left hand bar, select the folder icon.
 
 Navigate to Home --> virify_tutorial --> obs_results
 
     Open the gene map PDF files of the corresponding contigs to understand why some contigs were **not assigned** to a taxonomic lineage. You will see that for these cases, either there were not enough genes matching the HMMs, or there was disagreement in their assignment.
 
 |image5|\
+
+Running the practical locally
+-------------------------------
+
+First we need to set up our computing environment in order to execute the commands above. First, download and the **virify_tutorial.tar.gz** file containing all the data you will need using any of the following options:
+
+.. code-block:: bash
+
+    wget http://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify_courses/biata_2021/virify_tutorial.tar.gz
+    or
+    rsync -av --partial --progress rsync://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify_courses/biata_2021/virify_tutorial.tar.gz .
+
+Once downloaded, extract the files from the tarball:
+
+.. code-block:: bash
+
+    tar -xzvf virify_tutorial.tar.gz
+
+Now change into the **virify_tutorial** directory and setup the docker container by running the following commands in your terminal session:
+
+.. code-block:: bash
+
+    cd virify_tutorial
+    docker load --input docker/virify.tar
+    docker run --rm -it -v $(pwd)/data:/opt/data virify
+    mkdir obs_results
+
+The container has the following tools installed:
+* Python
+* R
+* VirSorter
+* VirFinder
+
+All scripts and databases used can be found in the data folder.
+
+
+All commands detailed below will be run from within this current working directory.
+You can now continue with step 1 above.
+
 
 .. |image1| image:: media/info.png
    :width: 0.26667in
