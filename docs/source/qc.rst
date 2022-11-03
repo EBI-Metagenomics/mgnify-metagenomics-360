@@ -393,8 +393,8 @@ e.g. "ILLUMINACLIP", where /opt/data/NexteraPE-PE is a file of adapters.
     cd /opt/data/skin
     <construct the required commands>
 
-Running the practical locally
--------------------------------
+Running the practical externally
+---------------------------------
 
 We need to first fetch the practical datasets.
 
@@ -437,11 +437,11 @@ Now start the docker container
 
 
 The container has the following tools installed:
-* kneaddata
-* fastqc
-* multiqc
-* blast
-* bowtie-2
+- kneaddata
+- fastqc
+- multiqc
+- blast
+- bowtie-2
 
 
 You can now continue this practical from the section "Quality control and filtering of the raw sequence files"

@@ -156,8 +156,8 @@ Navigate to Home --> virify_tutorial --> obs_results
 
 |image5|\
 
-Running the practical locally
--------------------------------
+Running the practical externally
+---------------------------------
 
 First we need to set up our computing environment in order to execute the commands above. First, download and the **virify_tutorial.tar.gz** file containing all the data you will need using any of the following options:
 
@@ -183,10 +183,10 @@ Now change into the **virify_tutorial** directory and setup the docker container
     mkdir obs_results
 
 The container has the following tools installed:
-* Python
-* R
-* VirSorter
-* VirFinder
+- Python
+- R
+- VirSorter
+- VirFinder
 
 All scripts and databases used can be found in the data folder.
 
