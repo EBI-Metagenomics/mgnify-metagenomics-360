@@ -13,7 +13,7 @@ The data we are using are abundance tables of taxonomic profiles gerated through
 
 |workflow|\
 
-MGnifyR is a library that provides a set of tools for easily accessing and processing MGnify data in R, making queries to MGnify databases through the MGnify API. The benefit of MGnifyR is that data can either be fetched in tsv format or be directly combined in a phyloseq object to run an analysis in a custom workflow.
+`MGnifyR<https://rdrr.io/github/beadyallen/MGnifyR/f/doc/MGnifyR.Rmd>` is a library that provides a set of tools for easily accessing and processing MGnify data in R, making queries to MGnify databases through the MGnify API. The benefit of MGnifyR is that data can either be fetched in tsv format or be directly combined in a phyloseq object to run an analysis in a custom workflow.
 
 The excercises are organized in 4 main sections:
 
