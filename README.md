@@ -17,23 +17,10 @@ Open a Terminal.
 ```shell
 (base) conda env create -n metagenomics -f environment.yml
 (base) conda activate metagenomics
-
-(metagenomics) pip install -r requirements.txt
-(metagenomics) conda install -c conda-forge r-irkernel
-(metagenomics) conda install -c conda-forge r-tidyverse
-(metagenomics) conda install -c conda-forge r-devtools
-(metagenomics) conda install ipykernel
-(metagenomics) R
-```
-
-```R
-> devtools::install_github("beadyallen/MGnifyR")
-> install.packages("tidyverse")
-> quit()
 ```
 
 ```shell
-(metagenomics) jupyter-lab course.jupyterlab-workspace
+(metagenomics) jupyter-lab .
 ```
 
 Jupyter should be using the "metagenomics" kernel, so that the packages are available.
